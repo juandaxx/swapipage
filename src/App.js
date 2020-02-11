@@ -1,6 +1,10 @@
 import React from 'react';
 import './App.css';
 import axios from 'axios';
+import UserCard from './components/UserCard/UserCard.js';
+import UserCardList from './components/UserCard/UserCardList.js';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
 
 class App extends React.Component {
 
@@ -86,21 +90,24 @@ class App extends React.Component {
               if (typeof this.state.planets.residents[residentKey].data.films[0] !== 'string') {
 
                 return (
-                  <div>
-                    <h1>Nombre del residente: {resident.data.name}</h1>
-                    <p>Estatura del residente: {resident.data.height}</p>
-                    <p>Masa del residente: {resident.data.mass}</p>
-                    <p>Color de cabello del residente: {resident.data.hair_color}</p>
-                    <p>Color de piel del residente: {resident.data.skin_color}</p>
-                    <p>Color de ojos del residente: {resident.data.eye_color}</p>
-                    <p>Cumpleaños del residente: {resident.data.birth_year}</p>
-                    <p>Genero del residente: {resident.data.gender}</p>
-                    <h2>Peliculas en las que actúa {this.state.planets.residents[residentKey].name}</h2>
-                    <p>{this.printResidentsFilmsData(residentKey)}</p>
+                  <Grid item xs={4} sm={4}>
+                    <UserCard
+                      name={resident.data.name}
+                      height={resident.data.height}
+                      mass={resident.data.mass}
+                      hair_color={resident.data.hair_color}
+                      skin_color={resident.data.skin_color}
+                      eye_color={resident.data.eye_color}
+                      birth_year={resident.data.birth_year}
+                      gender={resident.data.gender}
+                    >
+                      <UserCardList films={this.state.planets.residents[residentKey].data.films} />
+                    </UserCard>
                     <br></br>
-                  </div>
+                    <br></br>
+                  </Grid>
                 );
-              }    
+              }
               return newArrayResidents;
             });
 
@@ -109,18 +116,6 @@ class App extends React.Component {
       }
     }
     return newArrayResidents;
-  }
-
-  printResidentsFilmsData(residentKey) {
-    let arrayFilms = [];
-    arrayFilms = this.state.planets.residents[residentKey].data.films.map((film, filmKey) => {
-      return (
-        <p>     
-            <li>{this.state.planets.residents[residentKey].data.films[filmKey].data.title}</li>
-        </p>
-      );
-    });
-    return arrayFilms;
   }
 
 
@@ -143,7 +138,13 @@ class App extends React.Component {
           <li>Superficie del agua: {this.state.planets.surface_water}</li>
           <li>Población: {this.state.planets.population}</li>
         </ul>
-        <div>{this.printResidentsData()}</div>
+        <h1>Residentes</h1>
+        <br></br>
+        <Container fixed>
+          <Grid container spacing={10}>
+            {this.printResidentsData()}
+          </Grid>
+        </Container>
       </div> :
       null;
   }
