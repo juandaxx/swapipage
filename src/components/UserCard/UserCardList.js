@@ -32,32 +32,32 @@ export default function NestedList(props) {
   };
 
   return (
-    <List
-      component="nav"
-      aria-labelledby="nested-list-subheader"
-      className={classes.root}
-    >
-      <ListItem button onClick={handleClick}>
-        <ListItemIcon>
-          <MovieIcon />
-        </ListItemIcon>
-        <ListItemText primary="Films" />
-        {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
+      <List
+        component="nav"
+        aria-labelledby="nested-list-subheader"
+        className={classes.root}
+      >
+        <ListItem button onClick={handleClick}>
+          <ListItemIcon>
+            <MovieIcon />
+          </ListItemIcon>
+          <ListItemText primary="Films" />
+          {open ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
 
-      {films.map(film => {
-        return (
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <ListItem button className={classes.nested}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary={film.data.title} />
-            </ListItem>
-          </Collapse>)
-      }
-      )}
-    </List>
+        {films.map(film => {
+          return (
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <ListItem button className={classes.nested}>
+                <ListItemIcon>
+                  <StarBorder />
+                </ListItemIcon>
+                <ListItemText primary={film.data.title} />
+              </ListItem>
+            </Collapse>)
+        }
+        )}
+      </List>
   );
 }
 

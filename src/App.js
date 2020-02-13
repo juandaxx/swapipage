@@ -3,6 +3,7 @@ import './App.css';
 import axios from 'axios';
 import UserCard from './components/UserCard/UserCard.js';
 import UserCardList from './components/UserCard/UserCardList.js';
+import PlanetCard from './components/PlanetCard/PlanetCard.js'
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 
@@ -124,23 +125,25 @@ class App extends React.Component {
 
     return this.state.planets ?
       <div className="App">
+        <img className="planetBanner" src="img/tatooine.jpg" alt="tatooine" />  
+        <Container fixed>      
         <h1>Pagina web Star Wars</h1>
-        <img className="planetBanner" src="img/tatooine.jpg" alt="tatooine" />
-        <h2>Características del planeta</h2>
-        <ul>
-          <li>Nombre del planeta: {this.state.planets.name}</li>
-          <li>Rotación del planeta: {this.state.planets.rotation_period}</li>
-          <li>Periodo orbital: {this.state.planets.orbital_period}</li>
-          <li>Diametro del planeta: {this.state.planets.diameter}</li>
-          <li>Clima del planeta: {this.state.planets.climate}</li>
-          <li>Gravedad del planeta: {this.state.planets.gravity}</li>
-          <li>Terreno del planeta: {this.state.planets.terrain}</li>
-          <li>Superficie del agua: {this.state.planets.surface_water}</li>
-          <li>Población: {this.state.planets.population}</li>
-        </ul>
+        <h2>Características del planeta {this.state.planets.name}</h2>
+        <Grid container spacing={10}>
+        <PlanetCard
+          rotationPeriod={this.state.planets.rotation_period}
+          orbitalPeriod={this.state.planets.orbital_period}
+          diameter={this.state.planets.diameter}
+          climate={this.state.planets.climate}
+          gravity={this.state.planets.gravity}
+          terrain={this.state.planets.terrain}
+          surfaceWater={this.state.planets.surface_water}
+          population={this.state.planets.population}
+        >
+        </PlanetCard>
+        </Grid>
         <h1>Residentes</h1>
         <br></br>
-        <Container fixed>
           <Grid container spacing={10}>
             {this.printResidentsData()}
           </Grid>
