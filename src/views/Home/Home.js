@@ -9,6 +9,8 @@ import PlanetCard from '../../components/PlanetCard/PlanetCard.js';
 import Tab from '../../components/Tab/Tab.js'
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
+import { fetchData } from '../../actions/index.js';
+import { connect } from 'react-redux';
 
 
 class Home extends React.Component {
@@ -16,15 +18,15 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-  }
-
+  }  
+  
   componentDidMount() {
     this.fetchData('https://swapi.co/api/planets/1/')
       .then((response) => this.setDataPlanets(response))
       .then((response) => this.setResidents(response))
       .then((response) => this.setDataFilms())
       .then((response) => this.setResidentsFilms(response))
-      .catch(error => console.log(error));
+      .catch(error => console.log(error));    
   }
 
   fetchData(url) {
@@ -35,7 +37,7 @@ class Home extends React.Component {
     this.setState({
       planets: response.data
     });
-    let residentsList = [];
+    let residentsList = []; 
     this.state.planets.residents.forEach(residentUrl => {
       residentsList.push(this.fetchData(residentUrl));
     });
@@ -81,6 +83,7 @@ class Home extends React.Component {
     }));
   }
 
+  // -----------------------------------
 
   printResidentsData() {
     let newArrayResidents = [];
@@ -92,7 +95,7 @@ class Home extends React.Component {
             let arrayResidents = this.state.planets.residents;
             newArrayResidents = arrayResidents.map((resident, residentKey) => {
 
-              if (typeof this.state.planets.residents[residentKey].data.films[0] !== 'string') {
+              if (typeof resident.data.films[0] !== 'string') {
 
                 return (
                   <Grid item xs={4} sm={4}>
@@ -123,8 +126,9 @@ class Home extends React.Component {
     return newArrayResidents;
   }
 
-
+  
   render() {
+
     console.log(this.state.planets);
 
     return this.state.planets ?
@@ -159,4 +163,12 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchData: planetsData => {
+      dispatch(fetchData(planetsData));
+    }
+  }
+}
+
+export default connect(null,mapDispatchToProps)(Home);
