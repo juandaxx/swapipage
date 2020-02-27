@@ -1,7 +1,6 @@
 import React from 'react';
 import './Home.css';
 import '../../App.css';
-import axios from 'axios';
 import tatooineBanner from '../../img/tatooine.jpg';
 import UserCard from '../../components/UserCard/UserCard.js';
 import UserCardList from '../../components/UserCard/UserCardList.js';
@@ -9,96 +8,40 @@ import PlanetCard from '../../components/PlanetCard/PlanetCard.js';
 import Tab from '../../components/Tab/Tab.js'
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-import { fetchData } from '../../actions/index.js';
+import { dataPlanets } from '../../fetchSwapiData';
 import { connect } from 'react-redux';
 
 
 class Home extends React.Component {
- 
+
   constructor(props) {
     super(props);
     this.state = {};
-  }  
-  
+  }
+
   componentDidMount() {
-    this.fetchData('https://swapi.co/api/planets/1/')
-      .then((response) => this.setDataPlanets(response))
-      .then((response) => this.setResidents(response))
-      .then((response) => this.setDataFilms())
-      .then((response) => this.setResidentsFilms(response))
-      .catch(error => console.log(error));    
+    this.props.getDataPlanets();
   }
 
-  fetchData(url) {
-    return axios.get(url)
+  componentDidUpdate(props) {
   }
-
-  setDataPlanets(response) {
-    this.setState({
-      planets: response.data
-    });
-    let residentsList = []; 
-    this.state.planets.residents.forEach(residentUrl => {
-      residentsList.push(this.fetchData(residentUrl));
-    });
-    return Promise.all(residentsList);
-  }
-
-  setResidents(residentsList) {
-    this.setState(prevState => ({
-      planets: {
-        ...prevState.planets,
-        residents: residentsList
-      }
-    }))
-
-    return Promise.all([])
-  }
-
-  setDataFilms() {
-    let arrayFilms = [];
-    this.state.planets.residents.forEach(resident => {
-      resident.data.films.forEach(film => {
-        arrayFilms.push(this.fetchData(film));
-      });
-    });
-    return Promise.all(arrayFilms);
-  }
-
-  setResidentsFilms(arrayFilms) {
-    let planet = this.state.planets;
-    let i = 0;
-    planet.residents.forEach((resident, residentKey) => {
-
-      resident.data.films.forEach((film, filmKey) => {
-        planet.residents[residentKey].data.films[filmKey] = arrayFilms[i++];
-      });
-    });
-
-    this.setState(prevState => ({
-      planets: {
-        ...prevState.planets,
-        residents: planet.residents
-      }
-    }));
-  }
-
-  // -----------------------------------
 
   printResidentsData() {
+    // console.log(this.props);
+    
     let newArrayResidents = [];
-    if (this.state !== undefined) {
-      if (this.state.planets !== undefined) {
-        if (this.state.planets.residents) {
-          if (typeof this.state.planets.residents[0] !== 'string') {
 
-            let arrayResidents = this.state.planets.residents;
+    if (this.props !== undefined) {
+      if (this.props.planets !== undefined) {
+        if (this.props.planets.residents) {
+          if (typeof this.props.planets.residents[0] !== 'string') {
+
+            let arrayResidents = this.props.planets.residents;
             newArrayResidents = arrayResidents.map((resident, residentKey) => {
-
               if (typeof resident.data.films[0] !== 'string') {
-
+                
                 return (
-                  <Grid item xs={4} sm={4}>
+                  <Grid key={resident.data.name} item xs={4} sm={4}>
                     <UserCard
                       name={resident.data.name}
                       height={resident.data.height}
@@ -109,7 +52,7 @@ class Home extends React.Component {
                       birth_year={resident.data.birth_year}
                       gender={resident.data.gender}
                     >
-                      <UserCardList films={this.state.planets.residents[residentKey].data.films} />
+                      <UserCardList films={this.props.planets.residents[residentKey].data.films} />
                     </UserCard>
                     <br></br>
                     <br></br>
@@ -118,7 +61,6 @@ class Home extends React.Component {
               }
               return newArrayResidents;
             });
-
           }
         }
       }
@@ -126,34 +68,32 @@ class Home extends React.Component {
     return newArrayResidents;
   }
 
-  
+
   render() {
+    return this.props.planets ?
 
-    console.log(this.state.planets);
-
-    return this.state.planets ?
       <div className="Home">
-        <Tab></Tab>
-        <img className="planetBanner" src={tatooineBanner} alt="tatooine" />  
-        <Container fixed>      
-        <h1 className="titleWebPage">Pagina web Star Wars</h1>
-        <br></br>
-        <h2 className="subtitlesPlanet">Características del planeta {this.state.planets.name}</h2>
-        <Grid container spacing={10}>
-        <PlanetCard
-          rotationPeriod={this.state.planets.rotation_period}
-          orbitalPeriod={this.state.planets.orbital_period}
-          diameter={this.state.planets.diameter}
-          climate={this.state.planets.climate}
-          gravity={this.state.planets.gravity}
-          terrain={this.state.planets.terrain}
-          surfaceWater={this.state.planets.surface_water}
-          population={this.state.planets.population}
-        >
-        </PlanetCard>
-        </Grid>
-        <h1 className="subtitlesPlanet">Residentes</h1>
-        <br></br>
+        <Tab />
+        <img className="planetBanner" src={tatooineBanner} alt="tatooine" />
+        <Container fixed>
+          <h1 className="titleWebPage">Pagina web Star Wars</h1>
+          <br></br>
+          <h2 className="subtitlesPlanet">Características del planeta {this.props.planets.name}</h2>
+          <Grid container spacing={10}>
+            <PlanetCard
+              rotationPeriod={this.props.planets.rotation_period}
+              orbitalPeriod={this.props.planets.orbital_period}
+              diameter={this.props.planets.diameter}
+              climate={this.props.planets.climate}
+              gravity={this.props.planets.gravity}
+              terrain={this.props.planets.terrain}
+              surfaceWater={this.props.planets.surface_water}
+              population={this.props.planets.population}
+            >
+            </PlanetCard>
+          </Grid>
+          <h1 className="subtitlesPlanet">Residentes</h1>
+          <br></br>
           <Grid container spacing={10}>
             {this.printResidentsData()}
           </Grid>
@@ -163,12 +103,22 @@ class Home extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
+  console.log('state ', state)
   return {
-    onFetchData: planetsData => {
-      dispatch(fetchData(planetsData));
-    }
+    planets: state.planets
   }
 }
 
-export default connect(null,mapDispatchToProps)(Home);
+const mapDispatchToProps = dispatch => {  
+  return {
+    getDataPlanets: () => {
+      dispatch(dataPlanets());
+    }
+  }     
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);

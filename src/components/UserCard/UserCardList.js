@@ -24,6 +24,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function NestedList(props) {
   const { films } = props;
+  
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -47,7 +48,7 @@ export default function NestedList(props) {
 
         {films.map(film => {
           return (
-            <Collapse in={open} timeout="auto" unmountOnExit>
+            <Collapse key={film.data.episode_id} in={open} timeout="auto" unmountOnExit>
               <ListItem button className={classes.nested}>
                 <ListItemIcon>
                   <StarBorder />

@@ -4,8 +4,6 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-// import {useDispatch} from 'react-redux';
-// import {fetchData} from '../../actions/planets.actions'; 
 
 const useStyles = makeStyles({
   root: {
@@ -67,7 +65,6 @@ export default function SimpleCard(props) {
             Genero: {props.gender}
           </Typography>
         </CardContent>
-        {/* <button onClick={() => dispatch(fetchData())}>+++++</button> */}
         {props.children}
       </Card>
     </MuiThemeProvider>

@@ -1,22 +1,25 @@
-const initialState = {}
+const initialState = {
+    planets: {},
+    isLoading: false,
+    hasErrored: null
+}
 
-export default function PlanetsReducer(state = initialState, action) {
+
+const planets = (state = initialState, action) => {
+
     switch (action.type) {
-        case 'STARTED':
-            return state;
+        case 'DATA_IS_LOADING':
+            return {...state, isLoading: true};
 
-        case 'SET':
-            return {
-                ...action.payload
-            }
+        case 'DATA_FETCH_SUCCESS':            
+            return {...state, isLoading: false, planets: Object.assign({}, state.planets, action.planet)};
 
-        case 'ERROR':
-            return {
-                ...action.payload.error
-            }
+        case 'DATA_HAS_ERRORED':
+            return {...state, isLoading: false, hasErrored: action.error};
 
         default:
             return state;
     }
+};
 
-}
+export default planets;

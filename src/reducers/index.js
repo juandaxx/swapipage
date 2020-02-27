@@ -1,11 +1,11 @@
-import counterReducer from './counter.js';
-import loggedReducer from './isLogged.js';
+import {dataIsLoading, dataFetchSuccess, dataHasErrored} from './planets.reducer';
 import { combineReducers } from 'redux';
 
 
 const allReducers = combineReducers({
-    counter: counterReducer,
-    isLogged: loggedReducer
+    dataIsLoading,
+    dataFetchSuccess,
+    dataHasErrored
 });
 
 export default allReducers;
