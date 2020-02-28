@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light: '##f4c538',
+      light: '#f4c538',
       main: '#F2B707',
       dark: '#a98004',
       contrastText: '#fff',

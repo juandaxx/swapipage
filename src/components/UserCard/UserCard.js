@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 
   nameResident: {
     color: '#F2B707',
-    fontSize: 19,
+    fontSize: 18,
   },
 });
 

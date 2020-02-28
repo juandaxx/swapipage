@@ -5,11 +5,12 @@ import tatooineBanner from '../../img/tatooine.jpg';
 import UserCard from '../../components/UserCard/UserCard.js';
 import UserCardList from '../../components/UserCard/UserCardList.js';
 import PlanetCard from '../../components/PlanetCard/PlanetCard.js';
-import Tab from '../../components/Tab/Tab.js'
+import ProgressLinearBar from '../../components/ProgressLinearBar/ProgressLinearBar';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import { dataPlanets } from '../../fetchSwapiData';
 import { connect } from 'react-redux';
+
 
 
 class Home extends React.Component {
@@ -23,12 +24,8 @@ class Home extends React.Component {
     this.props.getDataPlanets();
   }
 
-  componentDidUpdate(props) {
-  }
-
   printResidentsData() {
-    console.log(this.props);
-    
+
     let newArrayResidents = [];
 
     if (this.props !== undefined) {
@@ -39,7 +36,7 @@ class Home extends React.Component {
             let arrayResidents = this.props.planets.data.residents;
             newArrayResidents = arrayResidents.map((resident, residentKey) => {
               if (typeof resident.data.films[0] !== 'string') {
-                
+
                 return (
                   <Grid key={resident.data.name} item xs={4} sm={4}>
                     <UserCard
@@ -71,9 +68,7 @@ class Home extends React.Component {
 
   render() {
     return this.props.planets.data ?
-
       <div className="Home">
-        <Tab />
         <img className="planetBanner" src={tatooineBanner} alt="tatooine" />
         <Container fixed>
           <h1 className="titleWebPage">Pagina web Star Wars</h1>
@@ -99,7 +94,8 @@ class Home extends React.Component {
           </Grid>
         </Container>
       </div> :
-      null;
+          <ProgressLinearBar />
+      ;
   }
 }
 
@@ -110,12 +106,12 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {  
+const mapDispatchToProps = dispatch => {
   return {
     getDataPlanets: () => {
       dispatch(dataPlanets());
     }
-  }     
+  }
 }
 
 export default connect(

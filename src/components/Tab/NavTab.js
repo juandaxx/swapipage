@@ -6,6 +6,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import ProgressLinearBar from '../../components/ProgressLinearBar/ProgressLinearBar';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -19,7 +21,7 @@ function TabPanel(props) {
       aria-labelledby={`nav-tab-${index}`}
       {...other}
     >
-      {value === index && <Box p={3}>{children}</Box>}
+      {value === index && <Box p={0}>{children}</Box>}
     </Typography>
   );
 }
@@ -52,9 +54,35 @@ function LinkTab(props) {
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
   },
+  navBar: {
+    backgroundColor: '#a98004',
+  },
+  content: {
+    paddingTop: 0,
+  }
 }));
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#f4c538',
+      main: '#F2B707',
+      dark: '#a98004',
+      contrastText: '#f4c538',
+    },
+    secondary: {
+      light: '#f4c538',
+      main: '#F2B707',
+      dark: '#a98004',
+      contrastText: '#fff',
+    }
+  },
+
+  typography: {
+    fontFamily: "'Press Start 2P', cursive"
+  }
+});
 
 export default function NavTabs(props) {
   const classes = useStyles();
@@ -65,27 +93,30 @@ export default function NavTabs(props) {
   };
 
   return (
+
     <div className={classes.root}>
-      <AppBar position="static">
-        <Tabs
-          variant="fullWidth"
-          value={value}
-          onChange={handleChange}
-          aria-label="nav tabs example"
-        >
-          <LinkTab label="Home" href="/drafts" {...a11yProps(0)} />
-          <LinkTab label="Page Two" href="/trash" {...a11yProps(1)} />
-          <LinkTab label="Page Three" href="/spam" {...a11yProps(2)} />
-        </Tabs>
-      </AppBar>
+      <MuiThemeProvider theme={theme}>
+        <AppBar className={classes.navBar} position="static">
+          <Tabs
+            variant="fullWidth"
+            value={value}
+            onChange={handleChange}
+            aria-label="nav tabs example"
+          >
+            <LinkTab label="Home" href="/drafts" {...a11yProps(0)} />
+            <LinkTab label="Page Two" href="/trash" {...a11yProps(1)} />
+            <LinkTab label="Page Three" href="/spam" {...a11yProps(2)} />
+          </Tabs>
+        </AppBar>
+      </MuiThemeProvider>
       <TabPanel value={value} index={0}>
         {props.children}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Page Two
+        <ProgressLinearBar></ProgressLinearBar>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Page Three
+        <ProgressLinearBar></ProgressLinearBar>
       </TabPanel>
     </div>
   );
