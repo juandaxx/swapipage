@@ -27,16 +27,16 @@ class Home extends React.Component {
   }
 
   printResidentsData() {
-    // console.log(this.props);
+    console.log(this.props);
     
     let newArrayResidents = [];
 
     if (this.props !== undefined) {
       if (this.props.planets !== undefined) {
-        if (this.props.planets.residents) {
-          if (typeof this.props.planets.residents[0] !== 'string') {
+        if (this.props.planets.data.residents) {
+          if (typeof this.props.planets.data.residents[0] !== 'string') {
 
-            let arrayResidents = this.props.planets.residents;
+            let arrayResidents = this.props.planets.data.residents;
             newArrayResidents = arrayResidents.map((resident, residentKey) => {
               if (typeof resident.data.films[0] !== 'string') {
                 
@@ -52,7 +52,7 @@ class Home extends React.Component {
                       birth_year={resident.data.birth_year}
                       gender={resident.data.gender}
                     >
-                      <UserCardList films={this.props.planets.residents[residentKey].data.films} />
+                      <UserCardList films={this.props.planets.data.residents[residentKey].data.films} />
                     </UserCard>
                     <br></br>
                     <br></br>
@@ -70,7 +70,7 @@ class Home extends React.Component {
 
 
   render() {
-    return this.props.planets ?
+    return this.props.planets.data ?
 
       <div className="Home">
         <Tab />
@@ -78,17 +78,17 @@ class Home extends React.Component {
         <Container fixed>
           <h1 className="titleWebPage">Pagina web Star Wars</h1>
           <br></br>
-          <h2 className="subtitlesPlanet">Características del planeta {this.props.planets.name}</h2>
+          <h2 className="subtitlesPlanet">Características del planeta {this.props.planets.data.name}</h2>
           <Grid container spacing={10}>
             <PlanetCard
-              rotationPeriod={this.props.planets.rotation_period}
-              orbitalPeriod={this.props.planets.orbital_period}
-              diameter={this.props.planets.diameter}
-              climate={this.props.planets.climate}
-              gravity={this.props.planets.gravity}
-              terrain={this.props.planets.terrain}
-              surfaceWater={this.props.planets.surface_water}
-              population={this.props.planets.population}
+              rotationPeriod={this.props.planets.data.rotation_period}
+              orbitalPeriod={this.props.planets.data.orbital_period}
+              diameter={this.props.planets.data.diameter}
+              climate={this.props.planets.data.climate}
+              gravity={this.props.planets.data.gravity}
+              terrain={this.props.planets.data.terrain}
+              surfaceWater={this.props.planets.data.surface_water}
+              population={this.props.planets.data.population}
             >
             </PlanetCard>
           </Grid>
