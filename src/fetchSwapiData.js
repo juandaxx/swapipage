@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { dataIsLoading, dataFetchSuccess, dataHasErrored } from './actions/planets.actions';
+import { planetModel } from './models/planet.model';
+
 export function dataPlanets() {
     return (dispatch) => {
         dispatch(dataIsLoading());
@@ -20,17 +22,19 @@ export function dataPlanets() {
                 })
                 return Promise.all([response, fetchResidentFilms(arrayResidentFilmsUrl)])
             })
-            .then((response)=>{
+            .then((response) => {
                 let i = 0;
                 let filmsArray = response[1];
-                response[0].residents.forEach((resident, residentKey)=>{
-                    resident.data.films.forEach((film, filmKey)=>{
+                response[0].residents.forEach((resident, residentKey) => {
+                    resident.data.films.forEach((film, filmKey) => {
                         response[0].residents[residentKey].data.films[filmKey] = filmsArray[i++]
                     })
                 })
                 return response[0]
             })
-            .then((response)=> dispatch(dataFetchSuccess(response)))
+            .then((response) => {
+                return dispatch(dataFetchSuccess(planetModel(response)))
+            })
             .catch((error) => dispatch(dataHasErrored(error)));
     }
 }
@@ -45,6 +49,6 @@ function fetchResident(arrayResidentsUrl) {
 }
 
 function fetchResidentFilms(arrayResidentFilmsUrl) {
-    let arrayResidentFilms = arrayResidentFilmsUrl.map((film)=>(axios.get(film)))
+    let arrayResidentFilms = arrayResidentFilmsUrl.map((film) => (axios.get(film)))
     return Promise.all(arrayResidentFilms);
 }

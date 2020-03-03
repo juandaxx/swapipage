@@ -56,10 +56,15 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
   navBar: {
-    backgroundColor: '#a98004',
+    backgroundColor: '#29073a',
   },
   content: {
     paddingTop: 0,
+  },
+  tittlePage: {
+    color: '#F2B707',
+    fontFamily: "'Press Start 2P', cursive",
+    textAlign: "center",
   }
 }));
 
@@ -104,8 +109,8 @@ export default function NavTabs(props) {
             aria-label="nav tabs example"
           >
             <LinkTab label="Home" href="/drafts" {...a11yProps(0)} />
-            <LinkTab label="Page Two" href="/trash" {...a11yProps(1)} />
-            <LinkTab label="Page Three" href="/spam" {...a11yProps(2)} />
+            <LinkTab label="Section two" href="/trash" {...a11yProps(1)} />
+            <LinkTab label="Section Three" href="/spam" {...a11yProps(2)} />
           </Tabs>
         </AppBar>
       </MuiThemeProvider>
@@ -113,10 +118,12 @@ export default function NavTabs(props) {
         {props.children}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ProgressLinearBar></ProgressLinearBar>
+        <h1 className={classes.tittlePage}>En construcción...</h1>
+        <ProgressLinearBar />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <ProgressLinearBar></ProgressLinearBar>
+        <h1 className={classes.tittlePage}>En construcción...</h1>
+        <ProgressLinearBar />
       </TabPanel>
     </div>
   );

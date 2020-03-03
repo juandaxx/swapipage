@@ -22,9 +22,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function NestedList(props) {
-  const { films } = props;
-  
+export default function NestedList(props) {  
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -42,18 +40,21 @@ export default function NestedList(props) {
           <ListItemIcon>
             <MovieIcon />
           </ListItemIcon>
-          <ListItemText primary="Films" />
+          <ListItemText primary={props.title} />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
 
-        {films.map(film => {
+        {props.dataToShow.map(data => {
+
+          //props.dataToShow is an array of items that you want to show in a list
+
           return (
-            <Collapse key={film.data.episode_id} in={open} timeout="auto" unmountOnExit>
+            <Collapse key={data.episode_id} in={open} timeout="auto" unmountOnExit>
               <ListItem button className={classes.nested}>
                 <ListItemIcon>
                   <StarBorder />
                 </ListItemIcon>
-                <ListItemText primary={film.data.title} />
+                <ListItemText primary={data.title} />
               </ListItem>
             </Collapse>)
         }

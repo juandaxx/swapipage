@@ -58,19 +58,19 @@ export default function LinearDeterminate() {
             <MuiThemeProvider theme={theme}>
                 <Container fixed>
                     <Grid item xs={12}>
-                        <LinearProgress value={completed} />          
-                        <LinearProgress value={completed} />       
-                        <LinearProgress value={completed} />       
-                        <LinearProgress value={completed} />       
-                        <LinearProgress value={completed} />       
-                        <LinearProgress value={completed} />       
-                        <LinearProgress value={completed} />       
-                        <LinearProgress value={completed} />       
-                        <LinearProgress value={completed} />       
-                        <LinearProgress value={completed} />       
-                        <LinearProgress value={completed} />       
-                        <LinearProgress value={completed} />       
-                        <LinearProgress value={completed} />             
+                        <LinearProgress value={completed} />  
+                        <LinearProgress value={completed} />  
+                        <LinearProgress value={completed} />  
+                        <LinearProgress value={completed} />  
+                        <LinearProgress value={completed} />  
+                        <LinearProgress value={completed} />  
+                        <LinearProgress value={completed} />  
+                        <LinearProgress value={completed} />  
+                        <LinearProgress value={completed} />  
+                        <LinearProgress value={completed} />  
+                        <LinearProgress value={completed} />  
+                        <LinearProgress value={completed} />  
+                        <LinearProgress value={completed} />               
                     </Grid>
                 </Container>
             </MuiThemeProvider>
