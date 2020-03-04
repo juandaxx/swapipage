@@ -5,10 +5,24 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
-import {tileData} from '../../views/Galery/Galery';
+import { tileData } from '../../views/Galery/Galery';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#F2B707',
+      main: '#F2B707',
+      dark: '#F2B707',
+      contrastText: '#F2B707',
+    },
+  },
+});
 
 const useStyles = makeStyles(theme => ({
   root: {
+    display: 'block',
+    flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
   },
@@ -46,27 +60,30 @@ const useStyles = makeStyles(theme => ({
 export default function SingleLineGridList() {
   const classes = useStyles();
 
+
   return (
     <div className={classes.root}>
-      <GridList className={classes.gridList} cols={6}>
-        {tileData.map(tile => (
-          <GridListTile key={tile.img}>
-            <img src={tile.img} alt={tile.title} />
-            <GridListTileBar
-              title={tile.title}
-              classes={{
-                root: classes.titleBar,
-                title: classes.title,
-              }}
-              actionIcon={
-                <IconButton aria-label={`star ${tile.title}`}>
-                  <StarBorderIcon className={classes.title} />
-                </IconButton>
-              }
-            />
-          </GridListTile>
-        ))}
-      </GridList>
+      <MuiThemeProvider theme={theme}>
+        <GridList className={classes.gridList} cols={3}>
+          {tileData.map(tile => (
+            <GridListTile style={{ height: "550px" }} key={tile.img}>
+              <img src={tile.img} alt={tile.title} />
+              <GridListTileBar
+                title={tile.title}
+                classes={{
+                  root: classes.titleBar,
+                  title: classes.title,
+                }}
+                actionIcon={
+                  <IconButton aria-label={`star ${tile.title}`}>
+                    <StarBorderIcon className={classes.title} />
+                  </IconButton>
+                }
+              />
+            </GridListTile>
+          ))}
+        </GridList>
+      </MuiThemeProvider>
     </div>
   );
 }
