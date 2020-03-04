@@ -96,9 +96,9 @@ class Home extends React.Component {
       <div className="Home">
         <img className="planetBanner" src={tatooineBanner} alt="tatooine" />
         <Container fixed>
-          <h1 className="titleWebPage">Pagina web Star Wars</h1>
+          <h1 className="titleHome">Pagina web Star Wars</h1>
           <br></br>
-          <h2 className="subtitlesPlanet">Características del planeta {this.props.planets.data.name}</h2>
+          <h2 className="subtitlesHome">Características del planeta {this.props.planets.data.name}</h2>
           <Grid container spacing={10}>
             <TextInfoCard
             dataToShow={[
@@ -144,7 +144,7 @@ class Home extends React.Component {
             >
             </TextInfoCard>
           </Grid>
-          <h1 className="subtitlesPlanet">Residentes</h1>
+          <h2 className="subtitlesHome">Residentes</h2>
           <br></br>
           <Grid container spacing={10}>
             {this.printResidentsData()}

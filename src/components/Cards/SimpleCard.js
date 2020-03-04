@@ -47,7 +47,7 @@ export default function SimpleCard(props) {
           <br></br>
           {props.dataToShow.map((data) => {
             return (
-              <Typography className={classes.p} variant="body2" component="p">
+              <Typography key={data} className={classes.p} variant="body2" component="p">
                 {data[0]}: {data[1]}
               </Typography>
             )

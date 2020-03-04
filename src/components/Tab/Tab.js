@@ -48,15 +48,15 @@ export default function CenteredTabs() {
           centered
         >
           <Link to="/home">
-            <Tab label="Home" />
+            <Tab label="Inicio" />
           </Link>
 
-          <Link to="/alert">
-            <Tab label="Alert" />
+          <Link to="/galery">
+            <Tab label="Galeria" />
           </Link>
 
-          <Link to="/progress">
-            <Tab label="ProgressBar"/>
+          <Link to="/contact">
+            <Tab label="Contacto"/>
           </Link>
         </Tabs>
       </Paper>

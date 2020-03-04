@@ -1,0 +1,39 @@
+.Contact {
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contactBanner {
+    width: 90%;
+    height: 300px;
+    border-radius: 10px;
+    box-shadow: 0 0 50px 0 #3F4242;
+}
+
+.titleContact {
+    text-align: center;
+    color: #F2B707;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.subtitlesContact {
+    text-align: center;
+    color: #F2B707;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.textContact {
+    padding: 10px;
+    text-align: center;
+    font-size: 21px;
+    color: #FFFFFF;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.contactLinks {
+    text-decoration: none;
+}

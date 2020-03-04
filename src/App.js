@@ -2,9 +2,9 @@ import React from 'react';
 import './App.css';
 import './index.css';
 import Home from './views/Home/Home.js';
+import { Contact } from './views/Contact/Contact';
+import { Galery } from './views/Galery/Galery';
 import Tab from './components/Tab/Tab';
-import Alert from './components/Alert/Alert';
-import ProgressLinearBar from './components/ProgressLinearBar/ProgressLinearBar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 class App extends React.Component {
@@ -15,8 +15,8 @@ class App extends React.Component {
           <Tab/>
           <Switch>
             <Route path="/home" component={Home} />
-            <Route path="/alert" exact component={Alert} />
-            <Route path="/progress" exact component={ProgressLinearBar} />
+            <Route path="/galery" exact component={Galery} />
+            <Route path="/contact" exact component={Contact} />
             <Route path="/" exact component={Home} />
           </Switch>
         </div>
