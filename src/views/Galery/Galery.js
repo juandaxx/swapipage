@@ -9,6 +9,8 @@ import c3po from '../../img/Galery/c3po.jpg';
 import jesuschrist from '../../img/Galery/jesuschrist.jpg';
 import tieFighter from '../../img/Galery/tieFighter.jpg';
 import r2d2 from '../../img/Galery/r2d2.jpg';
+import kyloRen from '../../img/Galery/kyloRen.jpg';
+import chewie from '../../img/Galery/chewie.jpg';
 import Carousel from '../../components/Carousel/Carousel';
 
 export const Galery = () => {
@@ -28,7 +30,7 @@ export const Galery = () => {
                 </Grid>
             </Container>
         </div>
-    )
+    )    
 }
 
 export const tileData = [
@@ -63,5 +65,13 @@ export const tileData = [
     {
         imgPath: r2d2,
         label: 'R2-D2',
+    },
+    {
+        imgPath: kyloRen,
+        label: 'Kylo Ren',
+    },
+    {
+        imgPath: chewie,
+        label: 'Chewbacca',
     },
 ];

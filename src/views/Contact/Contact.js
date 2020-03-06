@@ -27,29 +27,29 @@ export const Contact = () => {
             <MuiThemeProvider theme={theme}>
                 <img className="contactBanner" src={contactBanner} alt="contactBanner" />
                 <Container fixed>
-                    <h1 className="titleContact">Contacto</h1>
+                    <h1 className="titleContact">Contactanos!</h1>
                     <Grid item xs={12} sm={12}>
                         <p className="textContact">Puedes seguirnos en nuestras redes sociales y en nuestra página web oficial:</p>
                         <Grid item xs={4} sm={4}>
                             <ul>
                                 <a className="contactLinks" href="https://www.instagram.com/starwars/" target="_blank" rel="noopener noreferrer">
-                                    <InstagramIcon color="primary" /><span className="textContact">  Instagram</span>
+                                    <InstagramIcon color="primary" /><span className="textContact">Instagram</span>
                                 </a>
                                 <br />
                                 <a className="contactLinks" href="https://www.facebook.com/StarWars" target="_blank" rel="noopener noreferrer">
-                                    <FacebookIcon color="primary" /><span className="textContact">  Facebook</span>
+                                    <FacebookIcon color="primary" /><span className="textContact">Facebook</span>
                                 </a>
                                 <br />
                                 <a className="contactLinks" href="https://twitter.com/starwars" target="_blank" rel="noopener noreferrer">
-                                    <TwitterIcon color="primary" /><span className="textContact">  Twitter</span>
+                                    <TwitterIcon color="primary" /><span className="textContact">Twitter</span>
                                 </a>
                                 <br />
                                 <a className="contactLinks" href="https://www.youtube.com/user/starwars" target="_blank" rel="noopener noreferrer">
-                                    <YouTubeIcon color="primary" /><span className="textContact">  Youtube</span>
+                                    <YouTubeIcon color="primary" /><span className="textContact">Youtube</span>
                                 </a>
                                 <br />
                                 <a className="contactLinks" href="https://www.starwars.com/" target="_blank" rel="noopener noreferrer">
-                                    <StarBorderIcon color="primary" /><span className="textContact">  Página oficial</span>
+                                    <StarBorderIcon color="primary" /><span className="textContact">Página oficial</span>
                                 </a>
                                 <br />
                             </ul>

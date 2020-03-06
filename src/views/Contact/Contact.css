@@ -35,5 +35,6 @@ img {
 }
 
 .contactLinks {
-    text-decoration: none;
+    color: #FFF;
+    /* text-decoration: none; */
 }

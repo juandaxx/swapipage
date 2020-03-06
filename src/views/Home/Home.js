@@ -6,6 +6,7 @@ import SimpleCard from '../../components/Cards/SimpleCard.js';
 import CardList from '../../components/Cards/CardList.js';
 import TextInfoCard from '../../components/TextInfoCard/TextInfoCard.js';
 import ProgressLinearBar from '../../components/ProgressLinearBar/ProgressLinearBar';
+import SearchBar from '../../components/SearchBar/SearchBar.js';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import { dataPlanets } from '../../fetchSwapiData';
@@ -69,11 +70,11 @@ class Home extends React.Component {
                           "Genero",
                           resident.gender
                         ]
-                      ]}                      
+                      ]}
                     >
-                      <CardList 
+                      <CardList
                         title="Films"
-                        dataToShow={this.props.planets.data.residents[residentKey].films} 
+                        dataToShow={this.props.planets.data.residents[residentKey].films}
                       />
                     </SimpleCard>
                     <br></br>
@@ -101,24 +102,24 @@ class Home extends React.Component {
           <h2 className="subtitlesHome">Características del planeta {this.props.planets.data.name}</h2>
           <Grid container spacing={10}>
             <TextInfoCard
-            dataToShow={[
-              [
-                "Periodo de rotación",
-                this.props.planets.data.rotation_period
-              ],
-              [
-                "Periodo orbital",
-                this.props.planets.data.orbital_period
-              ],
-              [
-                "Diametro",
-                this.props.planets.data.diameter
-              ],
-              [
-                "Clima",
-                this.props.planets.data.climate
-              ]
-            ]}        
+              dataToShow={[
+                [
+                  "Periodo de rotación",
+                  this.props.planets.data.rotation_period
+                ],
+                [
+                  "Periodo orbital",
+                  this.props.planets.data.orbital_period
+                ],
+                [
+                  "Diametro",
+                  this.props.planets.data.diameter
+                ],
+                [
+                  "Clima",
+                  this.props.planets.data.climate
+                ]
+              ]}
             >
             </TextInfoCard>
             <TextInfoCard
@@ -145,8 +146,17 @@ class Home extends React.Component {
             </TextInfoCard>
           </Grid>
           <h2 className="subtitlesHome">Residentes</h2>
-          <br></br>
+          <br />
+          <br/>
           <Grid container spacing={10}>
+            <br />
+            <Grid container spacing={10}>
+              <Grid item xs={4} sm={4} />
+              <Grid item xs={4} sm={4}>
+                <SearchBar placeHolder="Ingresa una palabra clave" />
+              </Grid>
+              <Grid item xs={4} sm={4} />
+            </Grid>
             {this.printResidentsData()}
           </Grid>
         </Container>

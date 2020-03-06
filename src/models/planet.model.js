@@ -1,7 +1,7 @@
-export function planetModel(response) {    
-    let residentsArray = [];  
+export function planetModel(response) {
+    let residentsArray = [];
 
-    residentsArray = response.residents.map((resident, residentKey) => {      
+    residentsArray = response.residents.map((resident, residentKey) => {
         let residentFilmsArray = [];
         resident.data.films.map((film, filmKey) => {
             return residentFilmsArray[filmKey] = (
@@ -10,8 +10,8 @@ export function planetModel(response) {
                     episode_id: film.data.episode_id,
                 }
             )
-        })        
-        
+        })
+
         return residentsArray[residentKey] = (
             {
                 name: resident.data.name,
@@ -27,7 +27,7 @@ export function planetModel(response) {
         )
     })
 
-    let planet = {
+    return {
         name: response.name,
         rotation_period: response.rotation_period,
         orbital_period: response.orbital_period,
@@ -39,6 +39,4 @@ export function planetModel(response) {
         population: response.population,
         residents: residentsArray,
     }
-
-    return planet;
 }
