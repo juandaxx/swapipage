@@ -12,33 +12,43 @@ import Container from '@material-ui/core/Container';
 import { dataPlanets } from '../../fetchSwapiData';
 import { connect } from 'react-redux';
 
-
 class Home extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      searchWord: ''
+    };
   }
 
   componentDidMount() {
     this.props.getDataPlanets();
   }
 
-  printResidentsData() {
-
-    let newArrayResidents = [];
-
+   printResidentsData() {
+    let filteredResidents = [];
     if (this.props !== undefined) {
       if (this.props.planets !== undefined) {
         if (this.props.planets.data.residents) {
           if (typeof this.props.planets.data.residents[0] !== 'string') {
 
-            let arrayResidents = this.props.planets.data.residents;
-            newArrayResidents = arrayResidents.map((resident, residentKey) => {
+            let residentsToMap = this.props.planets.data.residents.filter((resident)=>{
+              return (
+                resident.name.toLowerCase().includes(this.state.searchWord.toLowerCase()) || 
+                resident.hair_color.toLowerCase().includes(this.state.searchWord.toLowerCase()) ||
+                resident.skin_color.toLowerCase().includes(this.state.searchWord.toLowerCase()) ||
+                resident.eye_color.toLowerCase().includes(this.state.searchWord.toLowerCase())
+              )
+            })
+        
+            console.log(residentsToMap);
+
+            filteredResidents = residentsToMap.map((resident, residentKey) => {
               if (typeof resident.films[0] !== 'string') {
 
                 return (
                   <Grid key={resident.name} item xs={4} sm={4}>
+
                     <SimpleCard
                       title={resident.name}
                       dataToShow={[
@@ -71,10 +81,11 @@ class Home extends React.Component {
                           resident.gender
                         ]
                       ]}
+                      
                     >
                       <CardList
                         title="Films"
-                        dataToShow={this.props.planets.data.residents[residentKey].films}
+                        dataToShow={residentsToMap[residentKey].films}
                       />
                     </SimpleCard>
                     <br></br>
@@ -82,17 +93,25 @@ class Home extends React.Component {
                   </Grid>
                 );
               }
-              return newArrayResidents;
+              return filteredResidents;
             });
           }
         }
       }
     }
-    return newArrayResidents;
+    return filteredResidents;
   }
 
+  handleInputSearch = (search) => {    
+    this.setState({ searchWord: search})
+  }
+
+  handleSubmitSearch(){
+
+  }
 
   render() {
+       
     return this.props.planets.data ?
       <div className="Home">
         <img className="planetBanner" src={tatooineBanner} alt="tatooine" />
@@ -153,7 +172,7 @@ class Home extends React.Component {
             <Grid container spacing={10}>
               <Grid item xs={4} sm={4} />
               <Grid item xs={4} sm={4}>
-                <SearchBar placeHolder="Ingresa una palabra clave" />
+                <SearchBar placeHolder="Ingresa una palabra clave" handleSubmitSearch={this.handleSubmitSearch} handleInputSearch={this.handleInputSearch}/>
               </Grid>
               <Grid item xs={4} sm={4} />
             </Grid>

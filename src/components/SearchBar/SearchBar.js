@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
@@ -29,23 +29,30 @@ const useStyles = makeStyles(theme => ({
 
 const theme = createMuiTheme({
   typography: {
-
     fontFamily: "'Press Start 2P', cursive"
   }
 });
 
 export default function CustomizedInputBase(props) {
-  const classes = useStyles();
+  const classes = useStyles(); 
+  const [search, setSearch] = useState('')
+
+  const onSubmitSearch = () => {    
+    props.handleInputSearch(search)
+    setSearch('')
+  }
 
   return (
     <MuiThemeProvider theme={theme}>
       <Paper component="form" className={classes.root}>
         <InputBase
+          value={search}
+          onChange={event => setSearch(event.target.value)}  
           className={classes.input}
           placeholder={props.placeHolder}
-          inputProps={{ 'aria-label': 'Buscar' }}
+          inputProps={{ 'aria-label' : 'Buscar' }} 
         />
-        <IconButton className={classes.iconButton} aria-label="search">
+        <IconButton onClick={onSubmitSearch} className={classes.iconButton} aria-label="search">
           <SearchIcon />
         </IconButton>
       </Paper>

@@ -4,6 +4,9 @@ const initialState = {
         isLoading: false,
         hasErrored: null
     },
+    wordToFilter: {
+        word: "",
+    }
 }
 
 
